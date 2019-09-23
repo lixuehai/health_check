@@ -90,16 +90,17 @@ class Node():
              else:
                 f.write('Rabbitmq cluster status abnormal!\n')
 def Overcloud_plat():
-    overcloud_plat_service.run_openrc()
+    overcloud_plat_service.shell_source('/home/stack/overcloudrc')
     nova_stat=overcloud_plat_service.nova_status()
     neutron_stat=overcloud_plat_service.neutron_status()
     cinder_stat=overcloud_plat_service.cinder_status()
+    glance_stat=overcloud_plat_service.glance_status()
     with open("health.txt", "a+") as f:
         f.write('-----OverCloud Platform Service--------\n')
         f.write("Nova Service status: "+nova_stat+'\n')
         f.write("Neutron Service status: "+neutron_stat+'\n')
         f.write("Cinder Service status: "+cinder_stat+'\n')
-
+        f.write("Glance Service status: "+glance_stat+'\n')
     
 
 

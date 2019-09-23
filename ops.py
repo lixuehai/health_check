@@ -1,7 +1,10 @@
-import os
+import subprocess, os
 
-def run_openrc():
-    os.system('source /home/stack/overcloudrc')
+def shell_source(file):
+    pipe = subprocess.Popen(". %s; env" % file, stdout=subprocess.PIPE, shell=True)
+    output = pipe.communicate()[0]
+    env = dict((line.split("=", 1) for line in output.splitlines()))
+    os.environ.update(env)
 
 
 def nova_status():
@@ -28,7 +31,7 @@ def cinder_status():
 
 
 if __name__ == '__main__':
-    run_openrc()
+    shell_source('/home/stack/overcloudrc')
     with open('service.txt', 'a+') as f:
         f.write(nova_status())
         f.write(neutron_status())
