@@ -28,6 +28,13 @@ def cinder_status():
         return "Cinder  Service abnormal!"
     else:
         return "Cinder  Service normal!"
+    
+def glance_status():
+    status=int(os.popen('glance image-list >/dev/null  2>&1;echo $?').read())
+    if  status == 0:
+        return "Glance  Service abnormal!"
+    else:
+        return "Glance  Service normal!"
 
 
 if __name__ == '__main__':
