@@ -1,6 +1,6 @@
 import paramiko
 import re
-import overcloud_plat_service
+import ops
 
 
 class Node():
@@ -90,11 +90,11 @@ class Node():
              else:
                 f.write('Rabbitmq cluster status abnormal!\n')
 def Overcloud_plat():
-    overcloud_plat_service.shell_source('/home/stack/overcloudrc')
-    nova_stat=overcloud_plat_service.nova_status()
-    neutron_stat=overcloud_plat_service.neutron_status()
-    cinder_stat=overcloud_plat_service.cinder_status()
-    glance_stat=overcloud_plat_service.glance_status()
+    ops.shell_source('/home/stack/overcloudrc')
+    nova_stat=ops.nova_status()
+    neutron_stat=ops.neutron_status()
+    cinder_stat=ops.cinder_status()
+    glance_stat=ops.glance_status()
     with open("health.txt", "a+") as f:
         f.write('-----OverCloud Platform Service--------\n')
         f.write("Nova Service status: "+nova_stat+'\n')
