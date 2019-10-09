@@ -19,7 +19,7 @@ class Node():
         ssh.connect(self.ip, 22, self.user,pkey=key)
         tran = ssh.get_transport()
         sftp = paramiko.SFTPClient.from_transport(tran)
-        sftp.put('/home/stack/healthcheck/service.py','/tmp/service.py')
+        sftp.put('/home/stack/health_check-master/os_system.py','/tmp/service.py')
         stdin, stdout, stderr = ssh.exec_command('sudo python /tmp/service.py')
         return stdout.read()
     def write_os_system(self):
